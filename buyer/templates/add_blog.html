@@ -1,0 +1,41 @@
+{% extends 'side_nav.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="p-5">
+    <div class="text-center">
+        <h1 class="h4 text-gray-900 mb-4">Post a Blog</h1>
+        <p style="color: red;">{{msg}}</p>
+    </div>
+    <form class="user" action="{% url 'add_blog' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="" class="">Blog Title</label>
+            <input type="text" class="form-control form-control-user"
+                id="exampleInputEmail" aria-describedby="emailHelp"
+                placeholder="Enter title..." name="title" >
+        </div>
+
+        <div class="form-group">
+            <label for="" class="">Blog Description</label>
+
+            <textarea name="des" required placeholder="Enter Description" class="form-control" id="" cols="30" rows="10"></textarea>
+        </div>
+       
+        <div class="form-group">
+            <label for="" class="">Blog Picture</label>
+            <input type="file" class="form-control form-control-user"
+                id="exampleInputEmail" aria-describedby="emailHelp"
+                placeholder="Enter title..." name="pic" required>
+        </div>
+        
+        <button type="submit" class="btn btn-primary btn-user btn-block"><i class="fa fa-pen"></i> POST BLOG</button>
+        <hr>
+        
+    </form>
+   
+</div>
+{% endblock %}
+ 

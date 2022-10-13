@@ -4,7 +4,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.http import HttpResponse
 
-from buyer.models import User
+from buyer.models import Blog, User
 # Create your views here.
 def index(request):
     try:
@@ -113,3 +113,30 @@ def change_profile(request):
             pass
         user_object.save()
         return render(request, 'profile.html', {'user_object': user_object})
+
+
+def add_blog(request):
+    user_object = User.objects.get(email = request.session['email'])
+    if request.method == 'POST':
+        if request.FILES:
+            Blog.objects.create(
+                title = request.POST['title'],
+                content = request.POST['des'],
+                writer = user_object,
+                pic = request.FILES['pic']
+            )
+        else:
+            Blog.objects.create(
+                title = request.POST['title'],
+                content = request.POST['des'],
+                writer = user_object,
+            )
+        return render(request, 'add_blog.html', {'user_object': user_object})
+    else:
+        return render(request, 'add_blog.html', {'user_object': user_object})
+
+
+def my_blog(request):
+    user_object = User.objects.get(email = request.session['email'])
+    my_blogs = Blog.objects.filter(writer = user_object)
+    return render(request, 'my_blog.html', {'blogs': my_blogs})

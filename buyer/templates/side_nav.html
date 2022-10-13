@@ -84,9 +84,9 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Utilities:</h6>
-                        <a class="collapse-item" href="#">Add New Blog</a>
+                        <a class="collapse-item" href="{% url 'add_blog' %}">Add New Blog</a>
                         <a class="collapse-item" href="#">View Blogs</a>
-                        <a class="collapse-item" href="#">My Blogs</a>
+                        <a class="collapse-item" href="{% url 'my_blog' %}">My Blogs</a>
                         <a class="collapse-item" href="utilities-other.html">Other</a>
                     </div>
                 </div>
@@ -110,7 +110,7 @@
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Login Screens:</h6>
-                        <a class="collapse-item" href="login.html">Login</a>
+                        <a class="collapse-item" href="{% url 'logout' %}">Logout</a>
                         <a class="collapse-item" href="register.html">Register</a>
                         <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
                         <div class="collapse-divider"></div>
@@ -326,9 +326,9 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Pablo Escobar</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{user_object.first_name}} {{user_object.last_name}}</span>
                                 <img class="img-profile rounded-circle"
-                                    src="#">
+                                    src="{{user_object.pic.url}}">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -357,53 +357,12 @@
 
                 </nav>
 
+                {% block content %}
 
-<h2>Total Donation : 50k USD</h2>
-<div class="col-lg-12">
-
-    
-    <div class="card shadow mb-4" style="border: 2px solid blue;">
-    
-    <!-- <div class="card shadow mb-4" style="border: 2px solid blue; background-color: black;"> -->
-
- 
-        <!-- Card Header - Dropdown -->
-        <div
-            class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-            <h6 class="m-0 font-weight-bold text-primary">74 Million Dollars A Day &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </h6>
-            <!-- <h6 class="m-0 font-weight-bold text-primary">74 Million Dollars A Day &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <small>{% if blog.update %} Updated on : {{blog.update}} {% else %} Posted on : {{blog.date}} {% endif %}</small> </h6> -->
-            <div class="dropdown no-arrow">
-                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400 text-success" style="color: black;"></i>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                    aria-labelledby="dropdownMenuLink">
-                    <div class="dropdown-header">Dropdown Header:</div>
-                    <a class="dropdown-item" href="#">Edit Blog</a>
-                    <a class="dropdown-item" href="#">Delete Blog</a>
-                    <div class="dropdown-divider"></div>
-                    
-                    <!-- <a class="dropdown-item" href="#">Hide Blog</a> -->
-                    
-                    <!-- <a class="dropdown-item" href="#">UnHide Blog</a> -->
-                    
-                </div>
-            </div>
-        </div>
-        <!-- Card Body -->
-        <div class="card-body">
-           Pablo Escobar Notorious Narco  - Pablo Escobar
-        </div>
-        
-        <img src="{% static 'img/home.png' %}" alt="" width="600px" height="200px">
-        
-    </div>
-    
-</div>
+                {% endblock %}
 
 
-     <!-- Footer -->
+                     <!-- Footer -->
      <footer class="sticky-footer bg-white">
         <div class="container my-auto">
             <div class="copyright text-center my-auto">
@@ -412,22 +371,22 @@
         </div>
     </footer>
     <!-- End of Footer -->
-
-</div>
-<!-- End of Content Wrapper -->
-
-</div>
-<!-- End of Page Wrapper -->
-
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-<i class="fas fa-angle-up"></i>
-</a>
-
-<!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-aria-hidden="true">
-<div class="modal-dialog" role="document">
+  
+  </div>
+  <!-- End of Content Wrapper -->
+  
+  </div>
+  <!-- End of Page Wrapper -->
+  
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+  <i class="fas fa-angle-up"></i>
+  </a>
+  
+  <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
     <div class="modal-content">
         <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
@@ -441,26 +400,26 @@ aria-hidden="true">
             <a class="btn btn-primary" href="login.html">Logout</a>
         </div>
     </div>
-</div>
-</div>
-
-<!-- Bootstrap core JavaScript-->
-<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
-<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-
-<!-- Core plugin JavaScript-->
-<script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
-
-<!-- Custom scripts for all pages-->
-<script src="{% static 'js/sb-admin-2.min.js' %}"></script>
-
-<!-- Page level plugins -->
-<script src="{% static 'vendor/chart.js/Chart.min.js' %}"></script>
-
-<!-- Page level custom scripts -->
-<script src="{% static 'js/demo/chart-area-demo.js' %}"></script>
-<script src="{% static 'js/demo/chart-pie-demo.js' %}"></script>
-
-</body>
-
-</html>
+  </div>
+  </div>
+  
+  <!-- Bootstrap core JavaScript-->
+  <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  
+  <!-- Core plugin JavaScript-->
+  <script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+  
+  <!-- Custom scripts for all pages-->
+  <script src="{% static 'js/sb-admin-2.min.js' %}"></script>
+  
+  <!-- Page level plugins -->
+  <script src="{% static 'vendor/chart.js/Chart.min.js' %}"></script>
+  
+  <!-- Page level custom scripts -->
+  <script src="{% static 'js/demo/chart-area-demo.js' %}"></script>
+  <script src="{% static 'js/demo/chart-pie-demo.js' %}"></script>
+  
+  </body>
+  
+  </html>

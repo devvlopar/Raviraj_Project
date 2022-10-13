@@ -14,3 +14,13 @@ class User(models.Model):
     def __str__(self):
         return self.first_name
     
+
+class Blog(models.Model):
+    title = models.CharField(max_length = 50)
+    content = models.TextField()
+    writer = models.ForeignKey(User, on_delete = models.CASCADE)
+    date = models.DateTimeField(auto_now_add = True)
+    pic = models.FileField(upload_to = 'blogs', default = 'sofo.jpg')
+
+    def __str__(self) -> str:
+        return self.title
