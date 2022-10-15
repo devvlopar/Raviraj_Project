@@ -1,5 +1,5 @@
 import random
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.core.mail import send_mail
 from django.conf import settings
 from django.http import HttpResponse
@@ -60,9 +60,11 @@ def otp(request):
 
 def login(request):
     if request.method == 'GET':
-        return render(request, 'login.html')
+        #DRY : Don't Repeat Yourself
+        return redirect('index')
     else:
         try:
+            global user_object
             user_object = User.objects.get(email = request.POST['email'])
             if user_object.password == request.POST['password']:
                 request.session['email'] = request.POST['email']
@@ -95,48 +97,61 @@ def logout(request):
 
 
 def change_profile(request):
-    if request.method == 'GET':
+    try:
         user_object = User.objects.get(email = request.session['email'])
-        return render(request, 'profile.html', {'user_object': user_object})
-    else:
-        user_object = User.objects.get(email = request.session['email'])
-        user_object.first_name = request.POST['fname']
-        user_object.last_name = request.POST['lname']
-        user_object.mobile = request.POST['mobile']
-        user_object.address = request.POST['address']
-        user_object.bio = request.POST['bio']
-
-        try:
-            request.FILES['pic']
-            user_object.pic = request.FILES['pic']
-        except:
-            pass
-        user_object.save()
-        return render(request, 'profile.html', {'user_object': user_object})
-
+        if request.method == 'GET':
+            
+            return render(request, 'profile.html', {'user_object': user_object})
+        else:
+            
+            user_object.first_name = request.POST['fname']
+            user_object.last_name = request.POST['lname']
+            user_object.mobile = request.POST['mobile']
+            user_object.address = request.POST['address']
+            user_object.bio = request.POST['bio']
+            try:
+                request.FILES['pic']
+                user_object.pic = request.FILES['pic']
+            except:
+                pass
+            user_object.save()
+            return render(request, 'profile.html', {'user_object': user_object})
+    except:
+        return render(request, 'login.html')
 
 def add_blog(request):
-    user_object = User.objects.get(email = request.session['email'])
-    if request.method == 'POST':
-        if request.FILES:
-            Blog.objects.create(
-                title = request.POST['title'],
-                content = request.POST['des'],
-                writer = user_object,
-                pic = request.FILES['pic']
-            )
+    try:
+        user_object = User.objects.get(email = request.session['email'])
+        if request.method == 'POST':
+            if request.FILES:
+                Blog.objects.create(
+                    title = request.POST['title'],
+                    content = request.POST['des'],
+                    writer = user_object,
+                    pic = request.FILES['pic']
+                )
+            else:
+                Blog.objects.create(
+                    title = request.POST['title'],
+                    content = request.POST['des'],
+                    writer = user_object,
+                )
+            return render(request, 'add_blog.html', {'user_object': user_object})
         else:
-            Blog.objects.create(
-                title = request.POST['title'],
-                content = request.POST['des'],
-                writer = user_object,
-            )
-        return render(request, 'add_blog.html', {'user_object': user_object})
-    else:
-        return render(request, 'add_blog.html', {'user_object': user_object})
-
+            return render(request, 'add_blog.html', {'user_object': user_object})
+    except:
+        return render(request, 'login.html')
 
 def my_blog(request):
-    user_object = User.objects.get(email = request.session['email'])
-    my_blogs = Blog.objects.filter(writer = user_object)
-    return render(request, 'my_blog.html', {'blogs': my_blogs})
+    try:
+        user_object = User.objects.get(email = request.session['email'])
+        my_blogs = Blog.objects.filter(writer = user_object)
+        return render(request, 'my_blog.html', {'blogs': my_blogs, 'user_object': user_object})
+    except:
+        return render(request, 'login.html')
+
+
+def view_blog(request):
+    blogs = Blog.objects.all()
+
+    return render(request, 'view_blog.html',{'user_object':user_object, 'blogs': blogs})

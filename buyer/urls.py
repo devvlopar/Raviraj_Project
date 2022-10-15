@@ -11,5 +11,7 @@ urlpatterns = [
     path('forgot_password/', views.forgot_password, name='forgot_password'),
     path('add_blog/', views.add_blog, name='add_blog'),
     path('my_blog/', views.my_blog, name='my_blog'),
+    path('view_blog/', views.view_blog, name='view_blog'),
+
 
 ]

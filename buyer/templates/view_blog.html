@@ -1,0 +1,59 @@
+{% extends 'side_nav.html' %}
+{% load static %}
+
+
+{% block content %}
+
+{% for single_blog in blogs %}
+<div class="col-lg-12">
+
+    
+    <div class="card shadow mb-4" style="border: 2px solid blue;">
+        <!-- Card Header - Dropdown -->
+        <div
+            class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">{{single_blog.title}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <small>Posted on : {{single_blog.date}}</small> </h6>
+            <div class="dropdown no-arrow">
+                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                    aria-labelledby="dropdownMenuLink">
+                    <div class="dropdown-header">Dropdown Header:</div>
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+           Blog by : {{single_blog.writer.first_name}} {{single_blog.writer.last_name}}
+        </div>
+        
+        <img src="{{single_blog.pic.url}}" alt="" width="600px" height="200px">
+        
+
+        <div class="row">
+            <div class="col-2">
+
+                <a href="#"><button class="btn btn-primary"><i class="fa fa-hand-holding-heart"></i></button></a>
+            </div>
+            <div class="col-4">
+                Likes : 67
+            </div>
+            <a href="#" class="btn btn-primary" >Donate</a>
+        </div>
+        <br>
+        <form action="#" method="POST">
+            
+            <input type="text" name="comment" class="form-control" placeholder="Comments ...">
+        </form>
+        <!-- Card Body -->  
+    </div>
+    
+</div>
+{% endfor %}
+
+{% endblock %}

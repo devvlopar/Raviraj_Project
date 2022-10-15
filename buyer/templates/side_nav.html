@@ -67,8 +67,8 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Components:</h6>
-                        <a class="collapse-item" href="buttons.html">My Profile</a>
-                        <a class="collapse-item" href="cards.html">Change Profile</a>
+                        
+                        <a class="collapse-item" href="{% url 'change_profile' %}">Change Profile</a>
                     </div>
                 </div>
             </li>
@@ -85,7 +85,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Utilities:</h6>
                         <a class="collapse-item" href="{% url 'add_blog' %}">Add New Blog</a>
-                        <a class="collapse-item" href="#">View Blogs</a>
+                        <a class="collapse-item" href="{% url 'view_blog' %}">View Blogs</a>
                         <a class="collapse-item" href="{% url 'my_blog' %}">My Blogs</a>
                         <a class="collapse-item" href="utilities-other.html">Other</a>
                     </div>
