@@ -24,3 +24,12 @@ class Blog(models.Model):
 
     def __str__(self) -> str:
         return self.title
+
+
+class Donation(models.Model):
+    user = models.ForeignKey(User, on_delete = models.CASCADE)
+    blog = models.ForeignKey(Blog, on_delete = models.CASCADE)
+    amount = models.FloatField(default = 0.0)
+
+    def __str__(self) -> str:
+        return self.user + ' has donated ' + self.blog
