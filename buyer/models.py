@@ -31,5 +31,5 @@ class Donation(models.Model):
     blog = models.ForeignKey(Blog, on_delete = models.CASCADE)
     amount = models.FloatField(default = 0.0)
 
-    def __str__(self) -> str:
-        return self.user + ' has donated ' + self.blog
+    
+    
