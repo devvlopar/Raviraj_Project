@@ -21,7 +21,6 @@ class Blog(models.Model):
     writer = models.ForeignKey(User, on_delete = models.CASCADE)
     date = models.DateTimeField(auto_now_add = True)
     pic = models.FileField(upload_to = 'blogs', default = 'sofo.jpg')
-
     def __str__(self) -> str:
         return self.title
 
