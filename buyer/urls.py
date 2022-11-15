@@ -16,7 +16,6 @@ urlpatterns = [
     path('donate_init/paymenthandler/', views.paymenthandler, name='paymenthandler'),
     path('donate_page/<int:pk>', views.donate_page, name="donate_page"),
     path('donate_init/', views.donate_init, name="donate_init"),
-
-
+    path('api_get/', views.UserShow.as_view(), name="api_get")
 
 ]

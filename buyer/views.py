@@ -8,6 +8,9 @@ from django.conf import settings
 from django.http import HttpResponse
 
 from buyer.models import Blog, User, Donation
+from rest_framework.views import APIView
+from . serializers import UserSerializer
+from rest_framework.response import Response
 # Create your views here.
 def index(request):
     try:
@@ -252,3 +255,20 @@ def paymenthandler(request):
     else:
        # if other than POST request is made.
         return HttpResponseBadRequest()
+
+
+class UserShow(APIView):
+
+    def get(self, request):
+        all_user = User.objects.all()
+        serializer = UserSerializer(all_user, many = True)
+        return Response(serializer.data)
+        
+    def post(self, request):
+        ser = UserSerializer(data = request.data)
+        if ser.is_valid():
+            ser.save()
+            return Response(ser.data)
+        else:
+            return Response(ser.errors)
+
